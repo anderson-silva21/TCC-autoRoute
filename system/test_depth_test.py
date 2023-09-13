@@ -4,14 +4,12 @@ import matplotlib.pyplot as plt
 # img3 = cv2.imread('../sequenciaTRES/maps/figuraUm_map.png')
 # img3 = cv2.imread('../mapMeioMetroEUmMetro.png')
 
-# Tente abrir e carregar a primeira imagem
 img3 = cv2.imread('../sequenciaTRES/maps/figuraUm_map.png')
 if img3 is not None:
     plt.imshow(img3)
 else:
     print("Não foi possível abrir a primeira imagem.")
 
-# Plote 5 linhas da imagem
 if img3 is not None:
     plt.figure()
     plt.plot(img3[580, :])

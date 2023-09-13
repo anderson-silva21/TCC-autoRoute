@@ -3,33 +3,27 @@ import numpy as np
 import matplotlib.pyplot as plt
 from queue import PriorityQueue
 
-img = cv2.imread('mapa_aereo.png', cv2.IMREAD_GRAYSCALE)
+img = cv2.imread('mapa_aereoDois.png', cv2.IMREAD_GRAYSCALE)
 
-# Dilatação dos obstáculos
-kernel = np.ones((75, 75), np.uint8)
+# dilatação dos obstáculos
+kernel = np.ones((200, 200), np.uint8)
 img_dilated = cv2.dilate(img, kernel, iterations=1)
 
 # centro da base do eixo X
 start_node = (img.shape[0] - 1, img.shape[1] // 2)
 
 # destino
-goal_node = (50, 100)
-
-# distância euclidiana
+goal_node = (50, 800)
 
 
-def heuristic(node, goal, img):
+def heuristic(node, goal, img):  # distância euclidiana
     penalty = 1.0
     distance = np.sqrt((node[0] - goal[0]) ** 2 + (node[1] - goal[1]) ** 2)
-
-    # penalização baseado na intensidade do pixel
     penalty_term = penalty * img[node[0], node[1]] / 255.0
     return distance + penalty_term
 
-# verifica limites do mapa e não é um obstáculo
 
-
-def is_valid(node, img):
+def is_valid(node, img):  # verifica limites do mapa e se não é um obstáculo
     if (
         0 <= node[0] < img.shape[0] and
         0 <= node[1] < img.shape[1] and
@@ -37,8 +31,6 @@ def is_valid(node, img):
     ):
         return True
     return False
-
-# algoritmo A*
 
 
 def astar(img, start, goal):
@@ -77,7 +69,7 @@ def astar(img, start, goal):
 
 path = astar(img_dilated, start_node, goal_node)
 
-# Desenhe o caminho no mapa aéreo
+# caminho no mapa aéreo
 if path:
     path_points = np.array(path)
 

@@ -18,7 +18,7 @@ else:
     derivada_segunda = np.gradient(np.gradient(img[299, :]))
 
     # Define um limite para identificar inícios e fins de platôs
-    limite_derivada_segunda = 0.5  # Ajuste conforme necessário
+    limite_derivada_segunda = 3.5
 
     # Percorre a segunda derivada para identificar inícios e fins de platôs
     em_plato = False  # Indica se está em um platô
