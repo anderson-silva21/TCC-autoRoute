@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-img = cv2.imread('../sequenciaTRES/maps/figuraDois_map.png',
+img = cv2.imread('../sequenciaTRES/maps/figuraTres_map.png',
                  cv2.IMREAD_GRAYSCALE)
 
 linha_central = 580
@@ -10,7 +10,6 @@ linha_central = 580
 if img is None:
     print("Imagem não carregada.")
 else:
-    print("shape", img.shape)
     x = img[linha_central, :]
 
     # Aumente o tamanho da janela para a convolução
@@ -54,8 +53,6 @@ else:
         obstaculo for obstaculo in obstaculos if obstaculo[0] >= 5 or obstaculo[1] <= 1595]
     print("Obstáculos filtrados:", obstaculos_filtrados)
 
-    plt.show()
-
    # Define limites mínimos para altura e diferença entre início e fim de obstáculos
     limite_altura_minima = 126
     limite_diferenca_x = 10
@@ -78,8 +75,8 @@ else:
         for x in range(inicio_x, fim_x + 1):
             mapa_aereo[altura_y, x] = 1
 
+    plt.figure()
     plt.imshow(mapa_aereo, cmap='gray')
-
     plt.show()
 
     nome_arquivo_saida = 'mapa_aereoDois.png'
